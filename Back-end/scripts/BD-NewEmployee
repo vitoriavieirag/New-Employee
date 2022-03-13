@@ -1,0 +1,87 @@
+CREATE DATABASE New_Employee;
+
+USE New_Employee;
+
+CREATE TABLE empresas_clientes (
+	idEmpresa int primary key auto_increment,
+    nomeEmpresa varchar (40),
+    CNPJ varchar (18),
+    representante varchar (40),
+    email varchar (40),
+    senha varchar (25)
+);
+
+CREATE TABLE enderecosEmpresa (
+	idEndereco int primary key auto_increment,
+    endereco varchar (40),
+    bairro varchar (30),
+    complemento varchar (20),
+    estado varchar (40),
+    cidade varchar (40),
+    idEmpresa int
+);
+
+CREATE TABLE sensor (
+	idSensor int primary key auto_increment,
+    nomeSensor varchar (20),
+    tipo ENUM ('Temperatura','Luminosidade'),
+    localidade varchar (50),
+    idEndereco int
+);
+
+CREATE TABLE registroSensor (
+	idRegistro int primary key auto_increment,
+    idSensor int,
+    dataHora datetime,
+    valorRegistro varchar (30)
+);
+
+CREATE TABLE produtividade (
+	idProdutividade int primary key auto_increment,
+    mes Varchar (30),
+    resltAbsenteismo varchar (30),
+    idEndereco int
+);
+
+CREATE TABLE telefonesEmpresas (
+	idTelefone int primary key auto_increment,
+    idEndereco int,
+    telefone Varchar (30)
+);
+
+select * from empresas_clientes;
+select * from enderecosempresa;
+select * from telefonesempresas;
+select * from produtividade;
+select * from registroSensor;
+select * from sensor;
+
+insert into empresas_clientes
+	values (null,'c6bank','113131313','Yuri','c6bank@email.com','1234'),
+		   (null,'safra','213131313','iury','safra@email.com','12345'),
+           (null,'bradesco','313131313','Yury','bradesco@email.com','123456');
+		
+insert into enderecosEmpresa
+	values (null,'ruaA','bairroA','1','Sao Paulo','Sao Paulo',1),
+		   (null,'ruaB','bairroB','2','Rio De Janeiro','Rio De Janeiro',2),
+           (null,'ruaC','bairroC','3','Minas Gerais','Belo Horizonte',2);
+           
+INSERT INTO telefonesempresas VALUES
+( null, 1, '+55 (11) 99552-6236' ),
+( null, 1, '+55 (35) 97598-5424' ),
+( null, 2, '+55 (55) 96548-8423' );
+
+INSERT INTO produtividade VALUES
+( null, 'Abril/2022', 10.5, 1 ),
+( null, 'Março/2022', 5.0, 1 ),
+( null, 'Abril/2022', 13.5, 2 );
+
+insert into registroSensor values 
+(null,1,'2022-10-10 22:03:10','24'),
+(null,2,'2022-05-08 11:33:15','33'),
+(null,2,'2021-12-15 09:30:22','15');
+           
+insert into sensor values 
+(null, 'tm35', 'temperatura','sala-b',2),
+(null, 'ldr', 'luminosidade','sala-c',300),
+(null, 'ldr', 'luminosidade','sala-b',500)
